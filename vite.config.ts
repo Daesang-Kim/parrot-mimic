@@ -2,8 +2,13 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// GitHub Pages serves this project from https://<user>.github.io/parrot-mimic/,
+// so production builds need that sub-path as the base; local dev stays at '/'.
+const isGhPagesBuild = process.env.DEPLOY_TARGET === 'gh-pages'
+
 // https://vite.dev/config/
 export default defineConfig({
+  base: isGhPagesBuild ? '/parrot-mimic/' : '/',
   plugins: [
     react(),
     VitePWA({
