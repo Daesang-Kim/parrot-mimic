@@ -1,0 +1,101 @@
+.app {
+  min-height: 100svh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.app__title {
+  font-size: 24px;
+  margin: 8px 0 0;
+}
+
+.app__status {
+  min-height: 1.5em;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+.parrot {
+  font-size: 96px;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.parrot--listening {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.parrot--talking {
+  animation: parrot-talk 0.3s ease-in-out infinite;
+}
+
+@keyframes parrot-talk {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+  }
+}
+
+.record-button {
+  width: 100%;
+  max-width: 280px;
+  padding: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1f2937;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.record-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.record-button--active {
+  background: var(--accent-strong);
+  transform: scale(0.97);
+}
+
+.preset-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.preset-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.preset-chip--selected {
+  border-color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.preset-chip__emoji {
+  font-size: 18px;
+}
