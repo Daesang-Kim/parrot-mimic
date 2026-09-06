@@ -1,0 +1,134 @@
+.parrot-stage {
+  width: min(85vw, 380px);
+  max-height: 100%;
+  aspect-ratio: 240 / 260;
+}
+
+.parrot-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.parrot-wing-left {
+  transform-box: view-box;
+  transform-origin: 91px 148px;
+}
+.parrot-wing-right {
+  transform-box: view-box;
+  transform-origin: 149px 148px;
+}
+.parrot-beak-lower {
+  transform-box: view-box;
+  transform-origin: 66px 116px;
+}
+.parrot-head {
+  transform-box: view-box;
+  transform-origin: 120px 135px;
+}
+.parrot-body,
+.parrot-neck,
+.parrot-head {
+  transform-box: view-box;
+}
+
+/* Idle: gentle breathing bob. */
+.parrot-stage--idle .parrot-body,
+.parrot-stage--idle .parrot-neck,
+.parrot-stage--idle .parrot-head {
+  animation: parrot-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes parrot-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Listening: an attentive little head tilt. */
+.parrot-stage--listening .parrot-head {
+  animation: parrot-tilt 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes parrot-tilt {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(4deg);
+  }
+}
+
+.parrot-stage--listening .parrot-wing-left,
+.parrot-stage--listening .parrot-wing-right {
+  animation: parrot-perk 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes parrot-perk {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-6deg);
+  }
+}
+
+/* Talking: wings flap and the beak mumbles along. */
+.parrot-stage--talking .parrot-wing-left {
+  animation: flap-left 0.32s ease-in-out infinite;
+}
+.parrot-stage--talking .parrot-wing-right {
+  animation: flap-right 0.32s ease-in-out infinite;
+}
+
+@keyframes flap-left {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-26deg);
+  }
+}
+@keyframes flap-right {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(26deg);
+  }
+}
+
+.parrot-stage--talking .parrot-beak-lower {
+  animation: mouth-flap 0.22s ease-in-out infinite;
+}
+
+@keyframes mouth-flap {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(7deg);
+  }
+}
+
+.parrot-stage--talking .parrot-head {
+  animation: parrot-bob 0.32s ease-in-out infinite;
+}
+
+@keyframes parrot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}

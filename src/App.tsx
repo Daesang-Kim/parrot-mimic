@@ -60,25 +60,31 @@ function App() {
 
   return (
     <main className="app">
-      <h1 className="app__title">🦜 앵무새 흉내내기</h1>
+      <header className="app__header">
+        <h1 className="app__title">🦜 앵무새 흉내내기</h1>
+      </header>
 
-      <ParrotCharacter isRecording={status === 'recording'} isPlaying={isPlaying} />
+      <section className="app__stage">
+        <ParrotCharacter isRecording={status === 'recording'} isPlaying={isPlaying} />
+      </section>
 
-      <p className="app__status">{statusMessage(status, isPlaying, error)}</p>
+      <section className="app__controls">
+        <p className="app__status">{statusMessage(status, isPlaying, error)}</p>
 
-      <RecordButton
-        isRecording={status === 'recording'}
-        disabled={!isMicSupported || status === 'requesting'}
-        label={status === 'recording' ? '놓으면 재생' : '눌러서 말하기'}
-        onPressStart={handlePressStart}
-        onPressEnd={handlePressEnd}
-      />
+        <RecordButton
+          isRecording={status === 'recording'}
+          disabled={!isMicSupported || status === 'requesting'}
+          label={status === 'recording' ? '놓으면 재생' : '눌러서 말하기'}
+          onPressStart={handlePressStart}
+          onPressEnd={handlePressEnd}
+        />
 
-      <PresetPicker
-        presets={VOICE_PRESETS}
-        selectedId={preset.id}
-        onSelect={setPresetId}
-      />
+        <PresetPicker
+          presets={VOICE_PRESETS}
+          selectedId={preset.id}
+          onSelect={setPresetId}
+        />
+      </section>
     </main>
   )
 }

@@ -1,55 +1,59 @@
 .app {
-  min-height: 100svh;
+  height: 100svh;
   max-width: 480px;
   margin: 0 auto;
-  padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
   text-align: center;
+  overflow: hidden;
+}
+
+.app__header {
+  flex: 0 0 auto;
+  padding: max(10px, env(safe-area-inset-top)) 20px 0;
 }
 
 .app__title {
-  font-size: 24px;
-  margin: 8px 0 0;
+  font-size: 18px;
+  margin: 4px 0;
+  opacity: 0.85;
+}
+
+/* Top ~2/3 of the screen: the parrot animation stage. */
+.app__stage {
+  flex: 2 1 0%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+/* Bottom ~1/3: status text + record button + preset picker. */
+.app__controls {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 20px calc(14px + env(safe-area-inset-bottom));
+  overflow-y: auto;
 }
 
 .app__status {
   min-height: 1.5em;
   color: var(--text);
   opacity: 0.75;
-}
-
-.parrot {
-  font-size: 96px;
-  line-height: 1;
-  transition: transform 0.15s ease;
-}
-
-.parrot--listening {
-  transform: scale(1.08) rotate(-2deg);
-}
-
-.parrot--talking {
-  animation: parrot-talk 0.3s ease-in-out infinite;
-}
-
-@keyframes parrot-talk {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1) rotate(2deg);
-  }
+  font-size: 15px;
 }
 
 .record-button {
   width: 100%;
-  max-width: 280px;
-  padding: 22px;
-  font-size: 20px;
+  max-width: 260px;
+  padding: 18px;
+  font-size: 18px;
   font-weight: 600;
   border: none;
   border-radius: 999px;
@@ -75,15 +79,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-top: 8px;
+  gap: 8px;
 }
 
 .preset-chip {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   background: var(--surface);
@@ -97,5 +100,5 @@
 }
 
 .preset-chip__emoji {
-  font-size: 18px;
+  font-size: 16px;
 }
