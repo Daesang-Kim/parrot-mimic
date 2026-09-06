@@ -24,6 +24,7 @@ export function RecordButton({
       }}
       onPointerUp={onPressEnd}
       onPointerLeave={() => isRecording && onPressEnd()}
+      onPointerCancel={() => isRecording && onPressEnd()}
     >
       {label}
     </button>
