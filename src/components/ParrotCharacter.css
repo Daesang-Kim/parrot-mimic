@@ -1,7 +1,7 @@
 .parrot-stage {
   width: min(85vw, 380px);
   max-height: 100%;
-  aspect-ratio: 240 / 260;
+  aspect-ratio: 260 / 300;
 }
 
 .parrot-svg {
@@ -13,31 +13,38 @@
 
 .parrot-wing-left {
   transform-box: view-box;
-  transform-origin: 91px 148px;
+  transform-origin: 112px 155px;
 }
 .parrot-wing-right {
   transform-box: view-box;
-  transform-origin: 149px 148px;
+  transform-origin: 148px 155px;
 }
 .parrot-beak-lower {
   transform-box: view-box;
-  transform-origin: 66px 116px;
+  transform-origin: 62px 141px;
 }
 .parrot-head {
   transform-box: view-box;
-  transform-origin: 120px 135px;
+  transform-origin: 130px 160px;
 }
 .parrot-body,
-.parrot-neck,
-.parrot-head {
+.parrot-tail {
   transform-box: view-box;
 }
+.parrot-eye {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
 
-/* Idle: gentle breathing bob. */
-.parrot-stage--idle .parrot-body,
-.parrot-stage--idle .parrot-neck,
-.parrot-stage--idle .parrot-head {
-  animation: parrot-breathe 2.6s ease-in-out infinite;
+/* Idle: gentle breathing bob + slow tail sway + the occasional blink. */
+.parrot-stage--idle .parrot-body {
+  animation: parrot-breathe 3s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.parrot-stage--idle .parrot-tail {
+  animation: parrot-sway 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.parrot-stage--idle .parrot-eye {
+  animation: parrot-blink 4.5s ease-in-out infinite;
 }
 
 @keyframes parrot-breathe {
@@ -50,9 +57,30 @@
   }
 }
 
-/* Listening: an attentive little head tilt. */
+@keyframes parrot-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes parrot-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* Listening: an attentive head tilt with a little wing perk. */
 .parrot-stage--listening .parrot-head {
-  animation: parrot-tilt 0.7s ease-in-out infinite alternate;
+  animation: parrot-tilt 0.7s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 
 @keyframes parrot-tilt {
@@ -66,7 +94,7 @@
 
 .parrot-stage--listening .parrot-wing-left,
 .parrot-stage--listening .parrot-wing-right {
-  animation: parrot-perk 0.7s ease-in-out infinite alternate;
+  animation: parrot-perk 0.7s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 
 @keyframes parrot-perk {
@@ -80,10 +108,10 @@
 
 /* Talking: wings flap and the beak mumbles along. */
 .parrot-stage--talking .parrot-wing-left {
-  animation: flap-left 0.32s ease-in-out infinite;
+  animation: flap-left 0.32s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 .parrot-stage--talking .parrot-wing-right {
-  animation: flap-right 0.32s ease-in-out infinite;
+  animation: flap-right 0.32s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes flap-left {
@@ -92,7 +120,7 @@
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-26deg);
+    transform: rotate(-28deg);
   }
 }
 @keyframes flap-right {
@@ -101,12 +129,12 @@
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(26deg);
+    transform: rotate(28deg);
   }
 }
 
 .parrot-stage--talking .parrot-beak-lower {
-  animation: mouth-flap 0.22s ease-in-out infinite;
+  animation: mouth-flap 0.22s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes mouth-flap {
@@ -120,7 +148,7 @@
 }
 
 .parrot-stage--talking .parrot-head {
-  animation: parrot-bob 0.32s ease-in-out infinite;
+  animation: parrot-bob 0.32s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes parrot-bob {
